@@ -1,0 +1,17 @@
+.nav {
+  height: 100%;
+  grid-area: n;
+  background-color: aquamarine;
+}
+
+.nav div {
+  padding: 5px;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav a.activeLink {
+  color: yellow;
+}

@@ -1,0 +1,18 @@
+.userBlock {
+  display: inline-block;
+
+}
+.userBlock div {
+  text-align: center;
+}
+
+.messageBlock {
+  display: inline-block;
+  border: 1px solid #ff3c72;
+  border-radius: 10px;
+  width: 70%;
+}
+
+.selectedPage {
+  font-weight: bold;
+}
