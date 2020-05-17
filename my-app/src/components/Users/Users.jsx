@@ -23,7 +23,7 @@ let Users = (props) => {
       <div key={t.id}>
         <div className={s.userBlock}>
           <div>
-            <NavLink to={'/profile/' + t.id}>
+            <NavLink to={`${/profile/}${t.id}`}>
               <img src={t.photos.small != null ? t.photos.small : userPhoto} alt="" />
             </NavLink>
           </div>

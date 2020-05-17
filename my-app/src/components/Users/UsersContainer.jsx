@@ -17,20 +17,21 @@ class UsersAPIComponent extends React.Component {
   componentDidMount() {
     this.props.setToggleIsFetching(true);
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-    .then(response => {
-      this.props.setUsers(response.data.items);
-      this.props.setTotalUsersCount(response.data.totalCount);
-      this.props.setToggleIsFetching(false);
-    });
+      .then(response => {
+        this.props.setUsers(response.data.items);
+        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setToggleIsFetching(false);
+      });
   }
 
   onPageChenges = (pageNumber) => {
     this.props.setToggleIsFetching(true);
     this.props.setCurrentPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-      this.props.setUsers(response.data.items);
-      this.props.setToggleIsFetching(false);
-    });
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.setUsers(response.data.items);
+        this.props.setToggleIsFetching(false);
+      });
   }
   render() {
     return <>
