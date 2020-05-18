@@ -2,6 +2,7 @@ import React from 'react';
 import userPhoto from '../../assets/images/userPhoto.jpg';
 import s from './Users.module.css';
 import { NavLink } from 'react-router-dom';
+import * as axios from 'axios';
 
 let Users = (props) => {
 
@@ -29,8 +30,46 @@ let Users = (props) => {
           </div>
           <div>
             {t.followed
-              ? <button onClick={() => props.unfollow(t.id)}>Follow</button>
-              : <button onClick={() => props.follow(t.id)}>Unfollow</button>}
+
+              ? <button disabled={props.followingInProgress.some(id => id === t.id)} onClick={() => {
+                props.setToggleFollowingProgress(true, t.id)
+                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${t.id}`,
+                  {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": '6d256147-ebe3-4533-9cde-74c76ea0f542'
+                    }
+                  })
+                  .then(response => {
+                    if (response.data.resultCode === 0) {
+                      props.unfollow(t.id)
+                      props.setToggleFollowingProgress(false, t.id)
+                    }
+                  });
+
+              }}>Unfollow</button>
+
+              :
+
+              <button disabled={props.followingInProgress.some(id => id === t.id)} onClick={() => {
+
+                props.setToggleFollowingProgress(true, t.id);
+                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${t.id}`, {},
+                  {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": '6d256147-ebe3-4533-9cde-74c76ea0f542'
+                    }
+                  })
+                  .then(response => {
+                    if (response.data.resultCode === 0) {
+                      props.follow(t.id)
+                      debugger
+                      props.setToggleFollowingProgress(false, t.id)
+                    }
+                  });
+
+              }}>Follow</button>}
           </div>
         </div>
         <div className={s.messageBlock}>
